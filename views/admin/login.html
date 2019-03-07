@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>管理员登录</title>
+</head>
+<body>
+	<form>
+		<label for="username">username:&nbsp;</label><input type="text" placeholder="input your username" name="username" id="username"/>
+		<label for="password">password:&nbsp;</label><input type="password" placeholder="input your password" name="password" id="password"/>
+		<input id="login" type="button" value="login"> 
+		<input id="reset" type="button" value="reset">
+	</form>
+
+	
+	<script type="text/javascript" src="/javascripts/jquery-1.12.2.min.js"></script>
+	<script type="text/javascript">
+		$('#login').click(function () {
+			$.post('/eternity/admin',{
+				'username':$('#username').val(),
+				'password':$('#password').val()
+			},function (data) {
+				if(data.success){
+					window.location.href = "/eternity/admin/index";
+				}else{
+					alert("账号、密码错误，请重新输入!");
+				}
+			});
+		});
+
+		$('#reset').click(function () {
+			$('#username').val('');
+			$('#password').val('');
+		});
+	</script>
+</body>
+</html>

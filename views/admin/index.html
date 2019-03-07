@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理员页面</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="config-div panel panel-default">
+        <h1 class="config-h1">*LoveRecord Config</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading" class="config-title">
+                <h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" 
+				   href="#collapseTwo">
+				   Click me to show current Says.
+				</a>
+			</h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body" id="says"></div>
+            </div>
+        </div>
+       	
+       	<h2 class="config-h2">Add Item</h2>
+       	<form method="post" action="/eternity/admin/love-record/upload" enctype="multipart/form-data">
+       		<input type="text" id="say" name="say" placeholder="please input your sentence" class="form-control block-inline" />
+       		<input type="file" name="inputFile" value="upload img" class="form-control block-inline"/>
+			<input type="submit" value="upload" class="btn btn-success block-inline">
+       	</form>
+    </div>
+    <script type="text/javascript" src="/javascripts/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $.get('/eternity/admin/love-record/says', function(data) {
+        data.split('\n').map(function(i) {
+            if (i != '')
+                $('#says').append('<p class="say">' + i + '</p>');
+        });
+    });
+    </script>
+</body>
+
+</html>
